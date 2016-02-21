@@ -1,0 +1,32 @@
+<ul class="nav nav-pills pull-right" style="font-size: 0.8em; ">
+  <li><%= link_to "Back", @folder %></li>
+</ul>
+
+<%= render "breadcrumbs" %>
+
+<p id="notice"><%= notice %></p>
+
+<h3>New subfolder</h3>
+<%= form_for(@subfolder) do |f| %>
+  <% if @subfolder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subfolder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+      <% @subfolder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: "form-control" %>
+    <%= f.hidden_field :parent_id, class: "form-control" %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<ul class="nav nav-pills pull-right" style="font-size: 0.8em; ">
+  <li><%= link_to "New Folder", new_folder_path %></li>
+</ul>
+
+<%= render "breadcrumbs" %>
+
+<p id="notice"><%= notice %></p>
+
+<ul id="folder-contents" class="nav nav-stacked">
+  <% Folder.top_level.each do |subfolder| %>
+      <%= render subfolder %>
+  <% end %>
+</ul>
+  

@@ -2,10 +2,27 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  root 'home#index'
+  resources :folders do # , defaults: {format: :json}
+    resources :docs, only: [:new, :create] #, defaults: {format: :json}
 
-  resources :patients, only: [:index, :show, :create, :update, :destroy], defaults: {format: :json}
+    member do 
+      get "new_subfolder"  
+    end
+  end
+    
+  resources :docs, except: [:index, :new, :create, :edit] # show acts like edit
+  
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+
+  # You can have the root of your site routed with "root"
+  root 'folders#index'
+
+
+  # You can have the root of your site routed with "root"
+  # root 'home#index'
+
+  # resources :patients, only: [:index, :show, :create, :update, :destroy], defaults: {format: :json}
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

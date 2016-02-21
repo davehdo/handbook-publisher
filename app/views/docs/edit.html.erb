@@ -1,0 +1,10 @@
+
+<ul class="nav nav-pills pull-right" style="font-size: 0.8em; ">
+  <li><%= link_to 'Cancel', @doc, data: { confirm: "Are you sure you want to cancel, losing all unsaved changes?" } %></li>
+  <li><%= link_to 'Destroy', @doc, method: :delete, data: { confirm: "Are you sure you want to delete the document '#{@doc.title}'?" } %></li>
+</ul>
+
+<%= render "folders/breadcrumbs" %>
+<h3>Editing Document</h3>
+<p class="alert alert-info">This document has several sections, the body of which is structured as <%= link_to "Markdown", "https://en.wikipedia.org/wiki/Markdown", target: "_blank" %>.</p>
+<%= render 'form' %>

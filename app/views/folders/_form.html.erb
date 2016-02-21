@@ -1,0 +1,44 @@
+<%= form_for(@folder, html: {class: "form-horizontal"}) do |f| %>
+  <% if @folder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+      <% @folder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+  </div>
+  
+    
+  <div class="form-group">
+    <%= f.label :parent_id, "Parent folder", class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select :parent_id, (Folder.all - [@folder] - @folder.descendants).collect {|e| [e.full_path, e.id]}, {include_blank: "None"}, class: "form-control" %>
+    </div>
+  </div>
+  
+  <h3>Rearrange order of contents</h3>
+  <%= f.fields_for :items do |g| %>
+    <div class="row">
+      <div class="col-sm-2">
+        <%= g.text_field :rank, class: "form-control" %>
+      </div>
+      <div class="col-sm-10">
+        <ul class="nav"><%= render g.object %></ul>
+      </div>
+    </div>
+  <% end %>
+  
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

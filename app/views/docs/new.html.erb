@@ -1,0 +1,8 @@
+<ul class="nav nav-pills pull-right" style="font-size: 0.8em; ">
+  <li><%= link_to 'Cancel', @folder, data: { confirm: "Are you sure you want to cancel, losing all unsaved changes?" } %></li>
+</ul>
+
+<%= render "folders/breadcrumbs" %>
+<h3>New Doc</h3>
+
+<%= render 'form' %>

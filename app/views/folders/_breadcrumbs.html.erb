@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+  <li><%= link_to fa_icon( "folder", text: "All"), root_path %></li>
+  <% if @doc and !@doc.new_record? %>
+      <% @doc.ancestors.reverse.each do |f| %>
+        <li><%= link_to fa_icon( "folder", text: f.title), f %></li>
+      <% end %>
+      <li class="active"><%= fa_icon "file-o" %> <%= @doc.title %></li>
+  <% elsif @folder and !@folder.new_record? %>
+    <% @folder.ancestors.reverse.each do |f| %>
+      <li><%= link_to fa_icon( "folder", text: f.title), f %></li>
+    <% end %>
+    <li class="active"><%= fa_icon "folder-open" %> <%= @folder.title %></li>
+  <% end %>
+</ol>

@@ -1,0 +1,64 @@
+<h3>File list</h3>
+
+<style>
+  .file-navigation-tree li {
+    list-style-type: none;
+  }
+  
+  ul.file-navigation-tree {
+    padding-left: 0px;
+  }
+  
+  .file-navigation-tree ul {
+    padding-left: 12px;
+  }
+</style>
+
+<%
+  # this pane uses @folder to decide which folder (and its ancestors)
+  # to display as expanded. If the user is going through docs_controller,
+  # we need to define @folder as the most proximal folder
+  @folder ||= @doc.folder if @doc
+%>
+
+<ul class="file-navigation-tree">
+  <% Folder.top_level.each do |subfolder| %>
+      <% if @folder and !@folder.new_record? and (@folder == subfolder or @folder.ancestors.include?(subfolder)) %>
+        <%= render "folders/folder_tree", folder: subfolder %>
+      <% else %>
+        <%= render subfolder %>
+      <% end %>
+  <% end %>
+</ul>
+
+
+<div>
+		<h3>Formatting Guide</h3>
+
+  <p>
+  	**bold**<br>
+  	_italic_
+  </p>
+  
+  <p>
+  	# heading 1<br>
+  	## heading 2<br>
+  	### heading 3
+  </p>
+  
+  <p>`pre-formatted text`</p>
+  <p>
+  	* list item<br>
+  	* list item two
+  </p>
+  
+  <p>
+  	1. first list item<br>
+  	1. second list item<br>
+  	1. third list item
+  </p>
+  
+  <p>[Google](http://www.google.com)</p>
+  
+  <p>![image title](http://path.to/filename.png)</p>	
+</div>          

@@ -1,0 +1,127 @@
+<%= form_for([@folder, @doc]) do |f| %>
+  <% if @doc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@doc.errors.count, "error") %> prohibited this doc from being saved:</h2>
+
+      <ul>
+      <% @doc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="form-group">
+      <%= f.label :title, "Document title" %><br>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :attribution, "Author(s)" %><br>
+      <%= f.text_field :attribution, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :keywords, "Keywords" %><br>
+      <%= f.text_field :keywords, class: "form-control" %>
+    </div>    
+
+    <div class="form-group">
+      <%= f.label :folder_id, "Parent folder" %><br>
+      <%= f.select :folder_id, Folder.all.collect {|e| [e.full_path, e.id]}, class: "form-control" %>
+    </div>
+
+  <%= f.fields_for :sections do |g| %>
+  <div class="panel panel-default show-view">
+    <%# default version of the panel for the SHOW view %>
+    <div class="panel-heading clearfix" style="padding: 0px; ">
+      <ul class="nav nav-pills pull-right" style="font-size: 0.8em; ">
+        <li><%= link_to "Edit", "#", class: "bind-section-edit" %></li>
+        <li><%= link_to 'Destroy', "#", class: "bind-section-destroy" %></li>
+      </ul>
+      <p style="font-size: 1.4em; padding: 6px 12px; "><%= g.object.new_record? ? "New section" : g.object.title  %></p>
+    </div>
+    <div class="panel-body show-view">
+      <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {}) %>
+      <%= raw markdown.render( g.object.content  || "") %>
+    </div>
+    
+    <%# another version of the panel for the EDIT view %>
+    <div class="panel-heading clearfix edit-view" style="padding: 0px;  display:none;">
+      <ul class="nav nav-pills pull-right" style="font-size: 0.8em; ">
+        <li><%= link_to "Save", "#", class: "bind-doc-save" %></li>
+        <li><%= link_to 'Destroy', "#", class: "bind-section-destroy" %></li>
+      </ul>
+      <%= g.text_field :title, placeholder: "Section title", style: "font-size: 1.4em; width: 500px; border: 0px; padding: 6px 12px; background-color: transparent;" %>
+    </div>
+    <div class="panel-body edit-view" style="padding: 0px;  display:none;">
+      <%= g.text_area :content, placeholder: "Section content", style: "width: 100%; border: 0px; padding: 12px; ", rows: 12 %>
+    </div>
+    
+    <%# a second version of the panel, for when marked for destruction %>
+    <div class="panel-heading clearfix destroy-view" style="display:none;">
+      <p>This section shall be destroyed upon saving</p>
+    </div>
+
+    <%= g.hidden_field :_destroy %>
+    <%= g.hidden_field :z_index %>
+  </div>
+
+  <% end %>
+  
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-primary" %> 
+  </div>
+<% end %>
+
+<script type="text/javascript">
+
+  var section = new function() {
+    self = this;
+    
+    this.edit = function(event) {
+      var o = $(event.target).closest(".panel")
+      o.children("[class^='panel-']").hide(0)
+      o.children(".edit-view").show(100)
+      event.preventDefault();
+      false
+    }
+    
+    this.destroy = function(event) {
+      if (confirm('Are you sure you want to destroy this section?')) {
+        var o = $(event.target).closest(".panel")
+        o.children("[class^='panel-']").hide(0)
+        o.children(".destroy-view").show(100)
+        o.find("[id$='_destroy']").val("1")
+      } else {
+          // Do nothing!
+      }
+      event.preventDefault();
+      false
+    }
+
+    
+  }
+  
+  var doc = new function() {
+    this.save = function(event) {
+      
+      var form = $('form[class$="_doc"]')
+      form.submit();      
+      // $.ajax({
+      //   type: "POST",
+      //   url: form.attr("action"),
+      //   data: form.serialize(),
+      //   success: function() {  document.notify("Saved");  },
+      // });
+
+      event.preventDefault();
+    }
+    
+  }
+  
+  $(".bind-doc-save").click( doc.save )
+  $(".bind-section-destroy").click( section.destroy )
+  $(".bind-section-edit").click( section.edit )
+  $(".bind-section-recover").click( section.recover )
+</script>

@@ -1,0 +1,12 @@
+<li><%= link_to fa_icon( "folder-open", text: folder.title), folder %></li>
+<ul>
+    <% folder.items.each do |item| %>
+      <% if item.class==Folder and @folder and !@folder.new_record? and (@folder == item or @folder.ancestors.include?(item)) %>
+        <%# show expanded version %>
+        <%= render "folders/folder_tree", folder: item %>
+      <% else %>
+        <%# collapsed %>
+        <%= render item %>
+      <% end %>
+    <% end %>
+</ul>
