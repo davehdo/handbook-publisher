@@ -2,10 +2,10 @@
     <p>{{flash.getMessage()}}</p>
 </div>
 
-<h3>Modules</h3>
+<p>Select a module</p>
 
 <div class="list-group">
-  <a href="/#/folders/{{ folder._id }}" class="list-group-item list-group-item-info" ng-repeat="folder in folders" ng-show="folder.parent_id == null">
+  <a href="/#/folders/{{ folder._id }}" class="list-group-item" ng-repeat="folder in folders" ng-show="folder.parent_id == null">
     <h4 class="list-group-item-heading">{{ folder.title }}</h4>
     <p class="list-group-item-text">This is a module</p>
   </a>

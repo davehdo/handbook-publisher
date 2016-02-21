@@ -15,9 +15,7 @@
 		  </h4>
 		</div><!-- /panel-heading -->
 
-		<div class="panel-body">
-		  {{ section.content }} 
-		</div>
+		<div class="panel-body" ng-bind-html="trustAsHtml(section.content)"></div>
 	</div><!-- /panel -->
 </div>
 

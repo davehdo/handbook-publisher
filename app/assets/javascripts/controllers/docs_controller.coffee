@@ -11,10 +11,12 @@ controllers = angular.module("controllers")
 # ])
 # 
 # 
-controllers.controller("DocsShowController", ["$scope", "$routeParams", "$location", "Doc", "flash", ($scope, $routeParams, $location, Doc, flash) -> 
+controllers.controller("DocsShowController", ["$scope", "$routeParams", "$location", "$sce", "Doc", "flash", ($scope, $routeParams, $location, $sce, Doc, flash) -> 
 # in case there is a flash message, pull it into scope so the view has access to it
 	$scope.flash = flash
-	console.log "Hi"
+	
+	$scope.trustAsHtml = $sce.trustAsHtml
+	
 	$scope.doc = Doc.find( $routeParams.id )
 ])
 
