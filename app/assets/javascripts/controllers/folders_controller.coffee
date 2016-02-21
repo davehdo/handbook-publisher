@@ -1,5 +1,5 @@
 # ============================  controllers module  ===========================
-controllers = angular.module("controllers", [])
+controllers = angular.module("controllers")
 
 
 controllers.controller("FoldersIndexController", ["$scope", "Folder", "flash", ($scope, Folder, flash) -> 

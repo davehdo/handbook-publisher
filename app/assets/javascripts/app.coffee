@@ -26,11 +26,25 @@ receta.config([ "$routeProvider",
 			# 	controller: "PatientsEditController"
 			# 	templateUrl: "patients/edit.html"
 			# )
+			.when("/docs/:id",
+				controller: "DocsShowController"
+				templateUrl: "docs/show.html"
+			)
 			.otherwise(
 				redirectTo: "/folders"
 			)
 
 ])
+
+# initialize the controllers module
+controllers = angular.module("controllers", [])
+# in subsequent controller files, put at the top:
+# controllers = angular.module("controllers")
+
+models = angular.module("models", ["ngResource"])
+# in subsequent model files, put at the top:
+# models = angular.module("models")
+
 
 # turns on token in API requests
 receta.config ($httpProvider) ->
