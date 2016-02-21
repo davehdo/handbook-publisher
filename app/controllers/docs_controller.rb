@@ -13,7 +13,7 @@ class DocsController < ApplicationController
   # (updated to nest inside folder)
   #
   def show
-    (8 - @doc.sections.size).times {@doc.sections.build}
+    #(8 - @doc.sections.size).times {@doc.sections.build}
   end
 
   # GET /folders/123/docs/new

@@ -27,7 +27,7 @@ end
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {})
 
 json.sections @doc.sections.sort_by{|e| e.rank || 1e6} do |section|
-    json.extract! section, :title, :content
+    json.extract! section, :title, :content, :rank
  	json.id section.to_param
     json.content_html (markdown.render( section.content  || ""))
 end

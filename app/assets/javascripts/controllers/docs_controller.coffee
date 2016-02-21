@@ -55,12 +55,26 @@ controllers.controller("DocsEditController", ["$scope", "$routeParams", "$locati
 		$scope.expanded_section = section
 	
 	$scope.submitForm = () ->
+		# important to set this before every update
 		$scope.doc.sections_attributes = $scope.doc.sections
 		$scope.doc.$update(null, () -> # parameters, success, error
 			flash.setMessage "Successfully saved"
-			$location.path( "/doc/#{ $scope.doc._id }" )
+			$location.path( "/docs/#{ $scope.doc._id }" )
 		)
 	
+	$scope.destroySection = (section) ->
+		if confirm "Are you sure you want to delete this section?"
+			section._destroy = true
+			# important to set this before every update
+			$scope.doc.sections_attributes = $scope.doc.sections
+			$scope.doc.$update(null, () -> # parameters, success, error
+				flash.setMessage "Successfully saved"
+				$location.path( "/docs/#{ $scope.doc._id }/edit" )
+			)
+	
+	$scope.addSection = () ->
+		$scope.doc.sections.push( {})
+		
 	# $scope.destroy = () ->
 	# 	if confirm("Are you sure you want to delete?")
 	# 		$scope.patient.$delete({id: $scope.patient._id}, () ->
