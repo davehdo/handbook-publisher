@@ -1,9 +1,34 @@
 <form class="form">	
 	<div class="input-group">	
-		<label class="form-label">Name</label>
-		<input type="text" ng-model="patient.name" class="form-control" />
+		<label class="form-label">Title</label>
+		<input type="text" ng-model="doc.title" class="form-control" />
+	</div>
+
+	<div class="input-group">	
+		<label class="form-label">Author(s)</label>
+		<input type="text" ng-model="doc.attributions" class="form-control" />
 	</div>
 	
+	<div class="input-group">	
+		<label class="form-label">Keywords</label>
+		<input type="text" ng-model="doc.keywords" class="form-control" />
+	</div>
+	
+	<h4>Sections</h4>
+	<div ng-repeat="section in doc.sections">
+		<input type="hidden" ng-model="section.id">
+		
+		<div class="xpanel panel-default">
+			<div class="panel-heading" style="padding: 0px; ">
+			  	<input type="text" ng-model="section.title" class="form-control" ng-click="expand(section)" style="font-size: 1.2em; width: 100%; border: 0px; padding: 6px 12px; background-color: transparent;"/>
+			</div><!-- /panel-heading -->
+
+			<div class="panel-body" style="padding: 0px; " ng-show="expanded_section == section">
+				<textarea ng-model="section.content" class="form-control" style="width: 100%; border: 0px; padding: 12px;" rows="12"></textarea>	  	
+			</div>
+		</div><!-- /panel -->
+	</div>
+		
 	<div class="input-group">
 		<input type="submit" class="btn btn-default" ng-click="submitForm()">
 	</div>

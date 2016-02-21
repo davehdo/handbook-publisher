@@ -30,6 +30,10 @@ receta.config([ "$routeProvider",
 				controller: "DocsShowController"
 				templateUrl: "docs/show.html"
 			)
+			.when("/docs/:id/edit",
+				controller: "DocsEditController"
+				templateUrl: "docs/edit.html"
+			)
 			.otherwise(
 				redirectTo: "/folders"
 			)
@@ -52,7 +56,7 @@ receta.config ($httpProvider) ->
 	$httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 
 #
-receta.directive("ngRender", () ->
-	restrict: "A"
-	templateUrl: "patients/_form.html"
-)
+# receta.directive("ngRender", () ->
+# 	restrict: "A"
+# 	templateUrl: "patients/_form.html"
+# )

@@ -8,17 +8,17 @@
 	<li class="active">{{ doc.meta.title }}</li>
 </ol>
 
-<h3>{{ doc.meta.title }}</h3>
+<h3>{{ doc.title }}</h3>
 <p>{{ doc.attribution }}</p>
 
-<div ng-repeat="section in doc.data.sections">
+<div ng-repeat="section in doc.sections">
 	<div class="xpanel panel-default">
-		<div class="panel-heading" ng-click="toggle(section)" role="tab" id="headingOne">
+		<div class="panel-heading" ng-click="toggle(section)">
 		  <h4 class="panel-title">{{ section.title || "Untitled" }}</h4>
 		</div><!-- /panel-heading -->
 
-		<div class="panel-body" ng-show="expanded_section == section" ng-bind-html="trustAsHtml(section.content)"></div>
+		<div class="panel-body" ng-show="expanded_section == section" ng-bind-html="trustAsHtml(section.content_html)"></div>
 	</div><!-- /panel -->
 </div>
 
-<a href="#/docs/{{ doc.parent_id }}/edit">Edit</a>
+<a href="#/docs/{{ doc._id }}/edit">Edit</a>

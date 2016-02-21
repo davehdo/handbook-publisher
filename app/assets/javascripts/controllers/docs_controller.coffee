@@ -42,24 +42,30 @@ controllers.controller("DocsShowController", ["$scope", "$routeParams", "$locati
 # 		) 
 # ])
 # 
-# 
-# controllers.controller("DocsEditController", ["$scope", "$routeParams", "$location", "Doc", "flash", ($scope, $routeParams, $location, Doc, flash) -> 
-# 	# in case there is a flash message, pull it into scope so the view has access to it
-# 	$scope.flash = flash
-# 
-# 	$scope.patient = Doc.get({ id: $routeParams.id})
-# 		
-# 	$scope.submitForm = () ->
-# 		$scope.patient.$update(null, () -> # parameters, success, error
-# 			flash.setMessage "Successfully saved"
-# 			$location.path( "/patients/#{ $scope.patient._id }" )
-# 		)
-# 		
-# 	$scope.destroy = () ->
-# 		if confirm("Are you sure you want to delete?")
-# 			$scope.patient.$delete({id: $scope.patient._id}, () ->
-# 				flash.setMessage "Deleted"
-# 				$location.path( "/patients/")
-# 			)
-# ])
+
+controllers.controller("DocsEditController", ["$scope", "$routeParams", "$location", "Doc", "flash", ($scope, $routeParams, $location, Doc, flash) -> 
+	# in case there is a flash message, pull it into scope so the view has access to it
+	$scope.flash = flash
+
+	$scope.doc = Doc.find(  $routeParams.id )
+
+	$scope.expanded_section = null
+	
+	$scope.expand = ( section ) ->
+		$scope.expanded_section = section
+	
+	$scope.submitForm = () ->
+		$scope.doc.sections_attributes = $scope.doc.sections
+		$scope.doc.$update(null, () -> # parameters, success, error
+			flash.setMessage "Successfully saved"
+			$location.path( "/doc/#{ $scope.doc._id }" )
+		)
+	
+	# $scope.destroy = () ->
+	# 	if confirm("Are you sure you want to delete?")
+	# 		$scope.patient.$delete({id: $scope.patient._id}, () ->
+	# 			flash.setMessage "Deleted"
+	# 			$location.path( "/patients/")
+	# 		)
+])
 
