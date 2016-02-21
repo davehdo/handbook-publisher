@@ -10,24 +10,24 @@ receta = angular.module("receta", [
 receta.config([ "$routeProvider", 
 	($routeProvider) ->
 		$routeProvider
-			.when("/patients",
-				controller: "PatientsIndexController"
-				templateUrl: "patients/index.html"
+			.when("/folders",
+				controller: "FoldersIndexController"
+				templateUrl: "folders/index.html"
 			)
-			.when("/patients/new",
-				controller: "PatientsNewController"
-				templateUrl: "patients/new.html"
+			# .when("/patients/new",
+			# 	controller: "PatientsNewController"
+			# 	templateUrl: "patients/new.html"
+			# )
+			.when("/folders/:id",
+				controller: "FoldersShowController"
+				templateUrl: "folders/show.html"
 			)
-			.when("/patients/:id",
-				controller: "PatientsShowController"
-				templateUrl: "patients/show.html"
-			)
-			.when("/patients/:id/edit",
-				controller: "PatientsEditController"
-				templateUrl: "patients/edit.html"
-			)
+			# .when("/patients/:id/edit",
+			# 	controller: "PatientsEditController"
+			# 	templateUrl: "patients/edit.html"
+			# )
 			.otherwise(
-				redirectTo: "/patients"
+				redirectTo: "/folders"
 			)
 
 ])

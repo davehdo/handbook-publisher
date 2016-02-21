@@ -2,29 +2,29 @@
 controllers = angular.module("controllers", [])
 
 
-controllers.controller("PatientsIndexController", ["$scope", "Patient", "flash", ($scope, Patient, flash) -> 
+controllers.controller("DocsIndexController", ["$scope", "Doc", "flash", ($scope, Doc, flash) -> 
 	# in case there is a flash message, pull it into scope so the view has access to it
 	$scope.flash = flash
 
 	# while this looks synchronous, what is returned is a "future", an object
 	# that will be filled with data when the XHR response returns
-	$scope.patients = Patient.query()
+	$scope.patients = Doc.query()
 ])
 
 
-controllers.controller("PatientsShowController", ["$scope", "$routeParams", "$location", "Patient", "flash", ($scope, $routeParams, $location, Patient, flash) -> 
+controllers.controller("DocsShowController", ["$scope", "$routeParams", "$location", "Doc", "flash", ($scope, $routeParams, $location, Doc, flash) -> 
 # in case there is a flash message, pull it into scope so the view has access to it
 	$scope.flash = flash
 
-	$scope.patient = Patient.get({ id: $routeParams.id})
+	$scope.patient = Doc.get({ id: $routeParams.id})
 ])
 
 
-controllers.controller("PatientsNewController", ["$scope", "$location", "Patient", "flash", ($scope, $location, Patient, flash) -> 
+controllers.controller("DocsNewController", ["$scope", "$location", "Doc", "flash", ($scope, $location, Doc, flash) -> 
 	# in case there is a flash message, pull it into scope so the view has access to it
 	$scope.flash = flash
 
-	$scope.patient = new Patient
+	$scope.patient = new Doc
 	
 	$scope.submitForm = () ->
 		$scope.patient.$save(null, () -> # parameters, success, error
@@ -34,11 +34,11 @@ controllers.controller("PatientsNewController", ["$scope", "$location", "Patient
 ])
 
 
-controllers.controller("PatientsEditController", ["$scope", "$routeParams", "$location", "Patient", "flash", ($scope, $routeParams, $location, Patient, flash) -> 
+controllers.controller("DocsEditController", ["$scope", "$routeParams", "$location", "Doc", "flash", ($scope, $routeParams, $location, Doc, flash) -> 
 	# in case there is a flash message, pull it into scope so the view has access to it
 	$scope.flash = flash
 
-	$scope.patient = Patient.get({ id: $routeParams.id})
+	$scope.patient = Doc.get({ id: $routeParams.id})
 		
 	$scope.submitForm = () ->
 		$scope.patient.$update(null, () -> # parameters, success, error

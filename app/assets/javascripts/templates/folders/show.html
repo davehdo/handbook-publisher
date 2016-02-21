@@ -1,0 +1,18 @@
+<div class="alert alert-warning" ng-show="flash.getMessage()">
+    <p>{{flash.getMessage()}}</p>
+</div>
+
+<p>Home / {{ folder.title }}</p>
+<div class="list-group">
+  <a href="/#/folders/{{ subfolder._id }}" class="list-group-item list-group-item-info" ng-repeat="subfolder in folder.subfolders">
+    <h4 class="list-group-item-heading">{{ subfolder.title }}</h4>
+    <p class="list-group-item-text">This is a subfolder</p>
+  </a>
+
+  <a href="/#/docs/{{ doc._id }}" class="list-group-item" ng-repeat="doc in folder.docs">
+    <h4 class="list-group-item-heading">{{ doc.title }}</h4>
+    <p class="list-group-item-text">This is a document</p>
+  </a>
+</div>
+
+<a ng-hide="1" href="#/folders/new">New Folder</a>
