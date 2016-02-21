@@ -2,20 +2,22 @@
     <p>{{flash.getMessage()}}</p>
 </div>
 
+<ol class="breadcrumb">
+	<li><a href="#/">Home</a></li>
+	<li ng-show="doc.parent"><a href="#/folders/{{ doc.parent._id }}">{{ doc.parent.title }}</a></li>
+	<li class="active">{{ doc.meta.title }}</li>
+</ol>
+
 <h3>{{ doc.meta.title }}</h3>
 <p>{{ doc.attribution }}</p>
 
 <div ng-repeat="section in doc.data.sections">
-	<div class="panel panel-default">
-		<div class="panel-heading" role="tab" id="headingOne">
-		  <h4 class="panel-title">
-		    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-		      {{ section.title }}
-		    </a>
-		  </h4>
+	<div class="xpanel panel-default">
+		<div class="panel-heading" ng-click="toggle(section)" role="tab" id="headingOne">
+		  <h4 class="panel-title">{{ section.title || "Untitled" }}</h4>
 		</div><!-- /panel-heading -->
 
-		<div class="panel-body" ng-bind-html="trustAsHtml(section.content)"></div>
+		<div class="panel-body" ng-show="expanded_section == section" ng-bind-html="trustAsHtml(section.content)"></div>
 	</div><!-- /panel -->
 </div>
 

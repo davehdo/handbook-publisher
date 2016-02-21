@@ -4,6 +4,15 @@ json.fileType "document"
 
 json.versionId "1"
 
+if @doc.folder
+	json.parent do
+		json.extract! @doc.folder, :title, :rank 
+		json._id @doc.folder.to_param
+	end
+else
+	json.parent nil
+end
+
 json.meta do
     json.attribution @doc.attribution
     json.keywords @doc.keywords

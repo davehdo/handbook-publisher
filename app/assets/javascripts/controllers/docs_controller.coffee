@@ -18,6 +18,14 @@ controllers.controller("DocsShowController", ["$scope", "$routeParams", "$locati
 	$scope.trustAsHtml = $sce.trustAsHtml
 	
 	$scope.doc = Doc.find( $routeParams.id )
+	
+	$scope.expanded_section = null
+	
+	$scope.toggle = ( section ) ->
+		if $scope.expanded_section == section
+			$scope.expanded_section = null
+		else
+			$scope.expanded_section = section
 ])
 
 # 
