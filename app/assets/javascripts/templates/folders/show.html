@@ -10,12 +10,12 @@
 
 <div class="list-group">
   <a href="/#/folders/{{ subfolder._id }}" class="list-group-item" ng-repeat="subfolder in folder.subfolders">
-    <h5 class="list-group-item-heading">{{ subfolder.title }}</h5>
+    <h4 class="list-group-item-heading">{{ subfolder.title }}</h4>
     <p class="list-group-item-text">{{ subfolder.description }}</p>
   </a>
 
   <a href="/#/docs/{{ doc._id }}" class="list-group-item" style="background-color: whitesmoke" ng-repeat="doc in folder.docs">
-    <h5 class="list-group-item-heading">{{ doc.title }}</h5>
+    <h4 class="list-group-item-heading">{{ doc.title }}</h4>
     <p class="list-group-item-text">{{ doc.description }}</p>
   </a>
 </div>
