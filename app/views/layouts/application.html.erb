@@ -9,38 +9,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="<%= root_path %>">Handbook App Publisher</a>
-    </div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+		  <!-- Brand and toggle get grouped for better mobile display -->
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		      <span class="sr-only">Toggle navigation</span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand" href="<%= root_path %>">Handbook App Publisher</a>
+		  </div>
 
-    <% if false %>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to "New Folder", new_folder_path %></li>
-        <% if @folder and !@folder.new_record? %>
-          <li><%= link_to "New File", new_folder_doc_path(@folder) %></li>
-        <% end %>
-
-      </ul>
-    </div><!-- /.navbar-collapse -->
-    <% end %>
-
-  </div><!-- /.container-fluid -->
-</nav>
+		</div><!-- /.container-fluid -->
+	</nav>
   
-  <div class="container-fluid">
-    <%= yield %>
-  </div>
+	<div class="container-fluid">
+		<%= yield %>
+	</div>
   
   <div class='notifications top-right'></div>
 </body>
